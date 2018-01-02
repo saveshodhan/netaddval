@@ -1,8 +1,8 @@
 /**
-* validates IP address (without mask)
-*
-* @param {String} ip - ip (only) address to validate, e.g.: 192.168.1.2
-* @return {bool}
+ * validates IP address (without mask)
+ *
+ * @param {String} ip - ip (only) address to validate, e.g.: 192.168.1.2
+ * @return {bool}
 **/
 function validateIPAddWithoutMask(ip){
     var r = /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
@@ -16,12 +16,12 @@ function validateIPAddWithoutMask(ip){
 
 
 /**
-* validates IP address (with mask)
-* if array of allowed values for masks is passed, matches if the mask is aprt of allowed masks
-*
-* @param {String} ip   - ip address (in CIDR notation) to validate, e.g.: 192.168.1.2/30
-* @param {Array} masks - (optional) array of allowed masks, e.g.: ['29', '30']
-* @return {bool}
+ * validates IP address (with mask)
+ * if array of allowed values for masks is passed, matches if the mask is part of allowed masks
+ *
+ * @param {String} ip   - ip address (in CIDR notation) to validate, e.g.: 192.168.1.2/30
+ * @param {Array} masks - (optional) array of allowed masks, e.g.: ['29', '30']
+ * @return {bool}
 **/
 function validateIPAddWithMask(ip, allowedMasks){
     var r = /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\/)(3[0-2]|2[0-9]|[01]?[0-9])$/;
@@ -51,10 +51,10 @@ function validateIPAddWithMask(ip, allowedMasks){
 
 
 /**
-* pad the binary number to eight bits
-*
-* @param {Number} num - binary number
-* @return {Array} - array of eight elements
+ * pad the binary number to eight bits
+ *
+ * @param {Number} num - binary number
+ * @return {Array} - array of eight elements
 **/
 function padToEight(num){
     return Array(8-num.length+1).join('0')+num;
@@ -62,15 +62,15 @@ function padToEight(num){
 
 
 /**
-* checks if the IP address is the network address (the very first address) of its subnet:
-*
-* convert the IP address to binary, then gets the host bits out of it.
-* the IP address is a network address if its host bits are all zero.
-* and host bits are bits that remain after we have got rid of the network bits (which are the first <mask> number of bits)
-* so, if the host bits are all zero, it means that this is the very first address
-*
-* @param {String} ip - ip address in CIDR notation, e.g.: 192.168.1.0/30
-* @return {bool}
+ * checks if the IP address is the network address (the very first address) of its subnet:
+ *
+ * convert the IP address to binary, then gets the host bits out of it.
+ * the IP address is a network address if its host bits are all zero.
+ * and host bits are bits that remain after we have got rid of the network bits (which are the first <mask> number of bits)
+ * so, if the host bits are all zero, it means that this is the very first address
+ *
+ * @param {String} ip - ip address in CIDR notation, e.g.: 192.168.1.0/30
+ * @return {bool}
 **/
 function isNetworkAddress(ip){
     var ipOnly = ip.split('/')[0];
@@ -81,8 +81,8 @@ function isNetworkAddress(ip){
         return true;
     }
 
-    ipOnly.split('.').forEach(function(e,i,a){
-        ipInBinary += padToEight(parseInt(e).toString(2));    // pad the binary number to eight bits
+    ipOnly.split('.').forEach(function(val, index, array){
+        ipInBinary += padToEight(parseInt(val).toString(2));    // pad the binary number to eight bits
     });
 
     hostId = ipInBinary.substring(mask);    // take out the last <mask> number of bits - that's the hostid
