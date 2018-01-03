@@ -24,7 +24,7 @@ function validateIPAddWithoutMask(ip){
  * @return {bool}
 **/
 function validateIPAddWithMask(ip, allowedMasks){
-    var r = /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\/)(3[0-2]|2[0-9]|[01]?[0-9])$/;
+    var r = /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\/)(3[0-2]|2[0-9]|1[0-9]|[1-9])$/;
     var result = ip.match(r);
     
     if (result){
